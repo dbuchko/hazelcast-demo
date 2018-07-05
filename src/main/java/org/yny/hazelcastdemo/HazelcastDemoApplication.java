@@ -29,6 +29,16 @@ public class HazelcastDemoApplication {
     @Bean
     public Config hazelcastConfig() {
         Config config = new Config();
+
+
+        config.getNetworkConfig().getInterfaces().setEnabled(true).addInterface("10.*.*.*");
+        config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
+        config.getNetworkConfig().getJoin().getTcpIpConfig()
+                .setEnabled(true)
+                .addMember("hazelcast1.apps.internal")
+                .addMember("hazelcast2.apps.internal");
+
+
         config.addMapConfig(
             new MapConfig().setName("hazelcastDemoCache")
                     .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
