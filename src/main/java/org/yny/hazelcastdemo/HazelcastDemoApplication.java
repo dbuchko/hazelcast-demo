@@ -30,8 +30,8 @@ public class HazelcastDemoApplication {
     public Config hazelcastConfig() {
         Config config = new Config();
 
-
-        config.getNetworkConfig().getInterfaces().setEnabled(true).addInterface("10.*.*.*");
+        config.getNetworkConfig().setPort(5701).setPortAutoIncrement(false);
+        config.getNetworkConfig().getInterfaces().setEnabled(true).addInterface("10.255.*.*");
         config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
         config.getNetworkConfig().getJoin().getTcpIpConfig()
                 .setEnabled(true)
